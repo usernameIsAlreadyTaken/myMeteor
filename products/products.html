@@ -1,0 +1,25 @@
+<head>
+  <title>Products</title>
+</head>
+
+<body>
+  {{> Products}}
+</body>
+
+<template name="Products">
+	<h1 align="center">Products</h1>
+
+	<div class="box">
+	  {{#each ProductArr}}
+	  	<div class="Product">
+	  		<h2>{{Name}}</h2>
+	  		<p>Price: ${{Price}}</p>
+	  		{{#if this.InStock}}
+	  			<p>This Item is in stock</p>
+	  		{{else}}
+	  			<p>This Item is currently sold out</p>
+	  		{{/if}}
+	  	</div>
+	  {{/each}}
+ 	</div>
+</template>

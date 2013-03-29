@@ -1,0 +1,13 @@
+/* CSS declarations go here */
+.Product {
+	background: blue;
+	width: 200px;
+	height: 200px;
+	float: left;
+	margin: 10px;
+}
+
+
+
+
+.box { width: 900px; height: 500px; background: red; margin: 0 auto; clear: both; }
