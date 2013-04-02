@@ -10,4 +10,9 @@
 
 
 
-.box { width: 900px; height: 500px; background: red; margin: 0 auto; clear: both; }
+.box { 
+	width: 900px; 
+	height: 500px; 
+	margin: 0 auto; 
+	clear: both; 
+}

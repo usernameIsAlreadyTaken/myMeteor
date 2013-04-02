@@ -4,11 +4,11 @@
 
 <body>
   {{> Products}}
+  {{> Cart}}
 </body>
 
 <template name="Products">
 	<h1 align="center">Products</h1>
-
 	<div class="box">
 	  {{#each ProductArr}}
 	  	<div class="Product">
@@ -23,3 +23,30 @@
 	  {{/each}}
  	</div>
 </template>
+
+<template name="Cart">
+	<h1>Cart</h1>
+	<div id="Cart">
+		<table>
+			<tr>
+				<th>Name</th>
+				<th>Price</th>
+				<th>Quantity</th>
+				<th>Total</th>
+			</tr>
+			{{#each CartItems}}
+				<tr>
+					<td>{{Name}}</td>
+					<td>${{Price}}</td>
+					<td>{{Quantity}}</td>
+					<td>${{Total}}</td>
+				</tr>
+			{{/each}}
+			<tr>
+				<td colspan="4">Total: ${{SubTotal}}</td>
+			</tr>
+		</table>
+	</div>
+</template>
+
+
