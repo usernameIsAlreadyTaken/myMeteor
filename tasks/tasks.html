@@ -54,20 +54,20 @@
 			<div id="Preloader"></div>
 		</div>
 		{{#each TasksForDate}}
-			<div class="TodosRow Clear">
+		<div class="TodosRow Clear">
 			<div class="Close"></div>
-		{{#if this.Done}}
-			<div class="Checked" onclick="Check('{{this._id}}', true);"></div>
-			<div class="Task Done">
-		{{else}}
-			<div class="Unchecked" onclick="Check('{{this._id}}', false);"></div>
-			<div class="Task">
-		{{/if}}
-		{{#if Editing}}
-			<input id="TodosEdit" value="{{Name}}" autofocus="autofocus"></div>
-		{{else}}
-			<span class="RowText">{{Name}}</span></div>	
-		{{/if}}
+			{{#if this.Done}}
+				<div class="Checked" onclick="Check('{{this._id}}', true);"></div>
+				<div class="Task Done">
+			{{else}}
+				<div class="Unchecked" onclick="Check('{{this._id}}', false);"></div>
+				<div class="Task">
+			{{/if}}
+			{{#if Editing}}
+				<input id="TodosEdit" value="{{Name}}" autofocus="autofocus"></div>
+			{{else}}
+				<span class="RowText">{{Name}}</span></div>	
+			{{/if}}
 		</div>
 		{{/each}}
 		<div id="TodosBottom" class='Clear'>

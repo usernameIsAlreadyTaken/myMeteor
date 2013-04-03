@@ -1,13 +1,45 @@
 <head>
-  <title>money</title>
+  <title>Money</title>
 </head>
 
 <body>
-  {{> hello}}
+  {{> Main}}
 </body>
 
-<template name="hello">
-  <h1>Hello World!</h1>
-  {{greeting}}
-  <input type="button" value="Click" />
+<template name="Main">
+	{{#if SignedIn}}
+		{{> Members}}
+	{{else}}
+		{{> Login}}
+	{{/if}}
+</template>
+
+<template name="Members">
+	<div id="Members">
+		<div id="MembersTop">
+			<div id="selectButton"></div>
+			<div id="Name">Name</div>
+			<div id="Balance">Balance</div>
+		</div>
+		{{#each members}}
+		
+		{{/each}}
+	</div>
+	
+</template>
+
+<template name="Login">
+	<div id="Login">
+		<div id="LoginTop">
+			<input type="text" id="Username">
+			<input type="password" id="Password">
+		</div>
+		<div id="ButtonRow">
+			<div id="LoginBButton"></div>
+			<div id="LoginButton"></div>
+			<div id="LoginAButton"></div>
+			<div id="PreloadButton"></div>
+		</div>
+		<div id="LoginBottom"></div>
+	</div>
 </template>
