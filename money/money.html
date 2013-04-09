@@ -1,45 +1,50 @@
 <head>
-  <title>Money</title>
+	<title>Money</title>
 </head>
 
 <body>
-  {{> Main}}
+{{> Main}}
 </body>
 
 <template name="Main">
-	{{#if SignedIn}}
+	<div>
+		<h3 align="center">Money Contral App</h3>
 		{{> Members}}
-	{{else}}
-		{{> Login}}
-	{{/if}}
+	</div>
 </template>
 
 <template name="Members">
-	<div id="Members">
-		<div id="MembersTop">
-			<div id="selectButton"></div>
-			<div id="Name">Name</div>
-			<div id="Balance">Balance</div>
-		</div>
-		{{#each members}}
-		
+	<table id="menbersTable" border="1" width="600px">
+		<tr>
+			<th><input type="checkbox" id="0" /></th>
+			<th>Name</th>
+			<th>Balance</th>
+			<th>Info</th>
+		</tr>
+		{{#each MemberList}}
+		<tr>
+			<td><input type="checkbox" id="{{id}}" name="{{name}}" /></td>
+			<td>{{name}}</td>
+			<td align="right">{{balance}}</td>
+			<td align="center"><button class="infoBtn" id="{{id}}">Info</button></td>
+		</tr>
 		{{/each}}
+		<tr>
+			<td></td>
+			<td align="center">name:<input id="newName" style="width:100px" /></td>
+			<td align="center">
+				<button id="add" style="width:100px"> + </button> 
+				<button id="del" style="width:100px"> - </button>
+			</td>
+			<td>Total: {{Total}}</td>
+		</tr>
+	</table>
+	<br></br>
+	<div>
+		money:<input id="money" size="3" /> &nbsp;&nbsp;&nbsp; 
+		reason: <input id="reason" size="24" />
+		<button id="launch"> launch </button>
+		<br/><button id="test">test</button>
 	</div>
-	
 </template>
 
-<template name="Login">
-	<div id="Login">
-		<div id="LoginTop">
-			<input type="text" id="Username">
-			<input type="password" id="Password">
-		</div>
-		<div id="ButtonRow">
-			<div id="LoginBButton"></div>
-			<div id="LoginButton"></div>
-			<div id="LoginAButton"></div>
-			<div id="PreloadButton"></div>
-		</div>
-		<div id="LoginBottom"></div>
-	</div>
-</template>
