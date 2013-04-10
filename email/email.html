@@ -1,0 +1,18 @@
+<head>
+	<title>Email</title>
+</head>
+
+<body>
+	{{> email}}
+</body>
+
+<template name="email">
+	{{#if done}}
+		<p>Email sent!</p>
+	{{else}}
+		<label>Enter your email address to receive email</label>
+		<br/>
+		<input type="email" id="email" size="45" />
+		<input type="button" id="btn" value="Submit" />
+	{{/if}}
+</template>
