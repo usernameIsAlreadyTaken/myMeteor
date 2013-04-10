@@ -1,0 +1,36 @@
+<head>
+	<title>Book</title>
+</head>
+
+<body>
+	{{> book}}
+</body>
+
+<template name="book">
+	<h1 align="center">Book CRUD</h1>
+	<table border="1" align="center">
+		<tr>
+			<th>Name</th>
+			<th>Author</th>
+			<th>Description</th>
+			<th>Status</th>
+			<th>Operate</th>
+		</tr>
+		{{#each booklist}}
+		<tr id="{{id}}">
+			<td><input type="text" disabled="disabled" value="{{name}}" /></td>
+			<td><input type="text" disabled="disabled" value="{{author}}" /></td>
+			<td><input type="text" disabled="disabled" value="{{description}}" /></td>
+			<td>{{status}}</td>
+			<td><button id="updateBtn">update</button><button id="deleteBtn">delete</button></td>
+		</tr>
+		{{/each}}
+		<tr>
+			<td><input type="text" value="" /></td>
+			<td><input type="text" value="" /></td>
+			<td><input type="text" value="" /></td>
+			<td></td>
+			<td align="center"><button id="addBtn">add</button></td>
+		</tr>
+	</table>
+</template>
