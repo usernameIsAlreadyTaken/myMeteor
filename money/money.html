@@ -16,34 +16,45 @@
 <template name="Members">
 	<table id="menbersTable" border="1" width="600px">
 		<tr>
-			<th><input type="checkbox" id="0" /></th>
+			<th><input type="checkbox" id="checkboxAll" /></th>
 			<th>Name</th>
+			<th>Email</th>
 			<th>Balance</th>
 			<th>Info</th>
 		</tr>
 		{{#each MemberList}}
 		<tr>
-			<td><input type="checkbox" id="{{id}}" name="{{name}}" /></td>
-			<td>{{name}}</td>
+			<td><input type="checkbox" id="{{id}}" name="{{name}}" class="eachCheckbox" /></td>
+			<td align="center">{{name}}</td>
+			<td align="center">{{email}}</td>
 			<td align="right">{{balance}}</td>
-			<td align="center"><button class="infoBtn" id="{{id}}">Info</button></td>
+			<td align="center"><button class="infoBtn" id="{{_id}}">Info</button></td>
 		</tr>
 		{{/each}}
 		<tr>
 			<td></td>
-			<td align="center">name:<input id="newName" style="width:100px" /></td>
+			<td></td>
+			<td></td>
+			<td align="right">Total: {{Total}}</td>
+			<td></td>
+		</tr>
+		<tr style="background-color:green;display:none">
+			<td>NEW</td>
+			<td align="center">name:<input id="newName" style="width:80px" /></td>
+			<td align="center">email:<input id="newEmail" style="width:180px" /></td>
 			<td align="center">
-				<button id="add" style="width:100px"> + </button> 
-				<button id="del" style="width:100px"> - </button>
+				<button id="add" style="width:60px"> + </button> 
 			</td>
-			<td>Total: {{Total}}</td>
+			<td align="center">
+				<button id="del" style="width:60px"> - </button>
+			</td>
 		</tr>
 	</table>
 	<br></br>
 	<div>
 		money:<input id="money" size="3" /> &nbsp;&nbsp;&nbsp; 
 		reason: <input id="reason" size="24" />
-		<button id="launch"> launch </button>
+		<button id="fire"> fire </button>
 		<br/><button id="test">test</button>
 	</div>
 </template>

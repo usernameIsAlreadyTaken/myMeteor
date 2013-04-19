@@ -9,6 +9,9 @@ if (Meteor.isClient) {
 	Template.Members.Total = function(){
 		var sum = 0;
 		var members = Members.find({});
+		members.forEach(function (member) {
+			sum += member.balance;
+		});
 		return sum;
 	};
 	
@@ -38,7 +41,7 @@ if (Meteor.isClient) {
 				});
 			}
 		},
-		'click #launch': function () {
+		'click #fire': function () {
 			money = $("#money").val();
 			reason = $("#reason").val();
 			$("#menbersTable input:checked").each(function(){
@@ -54,7 +57,22 @@ if (Meteor.isClient) {
 			alert(member.record);
 		},
 		'click #test': function () {
-			Members.remove({});
+			selected_member = Session.get("selected_members");
+			alert(selected_member);
+		},
+		'click #checkboxAll': function(){
+			if($("#checkboxAll").attr("checked") == "checked"){
+				$(".eachCheckbox").attr("checked", "checked");
+				
+			} else {
+				$(".eachCheckbox").removeAttr("checked");
+				Session.set("selected_members", []);
+			}
+		},
+		'click .eachCheckbox': function(){
+			id = $(this).attr("id");
+			Session.get("selected_members").put(id);
+			alert(Session.get("selected_members"));
 		}
 	});
 }
@@ -64,8 +82,8 @@ if (Meteor.isServer) {
 		Members.remove({});
 		//now = new date();
 		recordStr = 30+"/lunch/";
-		Members.insert({id:1, name:"James", balance:100, record:recordStr});
-		Members.insert({id:2, name:"River", balance:0, record:""});
-		Members.insert({id:3, name:"Oven", balance:0, record:""});
+		Members.insert({id:1, name:"James", balance:100, email:"", record:recordStr});
+		Members.insert({id:2, name:"River", balance:100, email:"", record:""});
+		Members.insert({id:3, name:"Chris", balance:0, email:"zhou.jun@139.com", record:""});
 	});
 }
