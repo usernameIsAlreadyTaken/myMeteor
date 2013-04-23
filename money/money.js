@@ -2,11 +2,11 @@
 Members = new Meteor.Collection("Members");
 
 if (Meteor.isClient) {
-	Template.Members.MemberList = function () {
-		return Members.find({}, {sort: {id:1}});
+	Template.main.members = function () {
+		return Members.find({}, {sort: {name: -1}});
 	};
 	
-	Template.Members.Total = function(){
+	Template.main.total = function(){
 		var sum = 0;
 		var members = Members.find({});
 		members.forEach(function (member) {
@@ -14,76 +14,44 @@ if (Meteor.isClient) {
 		});
 		return sum;
 	};
+
+	Template.main.selected_member = function () {
+		var member = Members.findOne(Session.get("selected_member"));
+		return member && member.name;
+	};
+  
+	Template.member.selected = function () {
+		return Session.equals("selected_member", this._id) ? "selected" : '';
+	};
+  
+	Template.member.events({
+		'click': function () {
+			Session.set("selected_member", this._id);
+		}
+	});
 	
-	Template.Members.events({
-		'click #add': function () {
-			if($("#newName").val() == ""){
-				alert("name can not be empty!");
-				return;
-			}
-			newName = $("#newName").val();
-			random = (Math.floor(Random.fraction()*11)*1000) + (Math.floor(Random.fraction()*10)*100);
-			count = Members.find().count();
-			newId = random + count;
-			Members.insert({id:newId, name:newName, balance:0, record:[]});
-			$("#newName").val("");
-		},
-		'click #del': function () {
-			var selectStrArr = [];
-			$("#menbersTable input:checked").each(function(){
-				name = $(this).attr("name");
-				selectStrArr.push(name);
-			});
-			if(confirm("Do you wanna delete " + selectStrArr + " ?")){
-				$("#menbersTable input:checked").each(function(){
-					id = $(this).attr("id");
-					Members.remove(id);
-				});
-			}
-		},
-		'click #fire': function () {
-			money = $("#money").val();
-			reason = $("#reason").val();
-			$("#menbersTable input:checked").each(function(){
-				id = $(this).attr("id");
-				//Members.update({'id':id}, {$set:{'balance':100}});
-			});
-			$("#money").val("");
-			$("#reason").val("");
-		},
-		'click .infoBtn': function () {
-			id = $(this).attr("id");
-			member = Members.findOne({id:id});
-			alert(member.record);
-		},
+	Template.main.events({
 		'click #test': function () {
-			selected_member = Session.get("selected_members");
-			alert(selected_member);
+			Members.update(Session.get("selected_member"), {$inc: {balance: 100}});
 		},
-		'click #checkboxAll': function(){
-			if($("#checkboxAll").attr("checked") == "checked"){
-				$(".eachCheckbox").attr("checked", "checked");
-				
-			} else {
-				$(".eachCheckbox").removeAttr("checked");
-				Session.set("selected_members", []);
-			}
+		'click #reduce': function(){
+			alert("reduce");
 		},
-		'click .eachCheckbox': function(){
-			id = $(this).attr("id");
-			Session.get("selected_members").put(id);
-			alert(Session.get("selected_members"));
+		'click #add': function(){
+			alert("add");
 		}
 	});
 }
 
 if (Meteor.isServer) {
 	Meteor.startup(function () {
-		Members.remove({});
-		//now = new date();
-		recordStr = 30+"/lunch/";
-		Members.insert({id:1, name:"James", balance:100, email:"", record:recordStr});
-		Members.insert({id:2, name:"River", balance:100, email:"", record:""});
-		Members.insert({id:3, name:"Chris", balance:0, email:"zhou.jun@139.com", record:""});
+		if (Members.find().count() === 0) {
+			Members.insert({name:"Chris", balance:0, email:"zhou.jun@139.com"});
+			Members.insert({name:"James", balance:100, email:""});
+			Members.insert({name:"River", balance:100, email:""});
+			Members.insert({name:"aaa", balance:0, email:""});
+			Members.insert({name:"bbb", balance:0, email:""});
+			Members.insert({name:"ccc", balance:0, email:""});
+		}
 	});
 }
