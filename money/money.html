@@ -35,18 +35,20 @@
 		</tr>
 	</table>
 	<hr/>
-	{{#if selected_member}}
+	{{#if selected_name}}
 	<div align="center">
-		{{selected_member}} selected
+		{{selected_name}} selected
 		<br/>
 		<button id="reduce"> - money </button> &nbsp;&nbsp;&nbsp; 
-		value:<input size="10" /> &nbsp;&nbsp;&nbsp; 
+		value:<input id="value" size="10" /> &nbsp;&nbsp;&nbsp; 
 		<button id="add"> + money </button>
 		<br/>
-		<button id="test">test</button>
 	</div>
+	<button id="test1">test1</button>
+	<button id="test2">test2</button>
+	<button id="test3">test3</button>
 	{{/if}}
-	{{#unless selected_member}}
+	{{#unless selected_name}}
 	<div align="center">nobody selected</div>
 	{{/unless}}
 </template>

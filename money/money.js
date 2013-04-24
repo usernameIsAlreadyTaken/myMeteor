@@ -15,7 +15,7 @@ if (Meteor.isClient) {
 		return sum;
 	};
 
-	Template.main.selected_member = function () {
+	Template.main.selected_name = function () {
 		var member = Members.findOne(Session.get("selected_member"));
 		return member && member.name;
 	};
@@ -31,14 +31,27 @@ if (Meteor.isClient) {
 	});
 	
 	Template.main.events({
-		'click #test': function () {
-			Members.update(Session.get("selected_member"), {$inc: {balance: 100}});
-		},
 		'click #reduce': function(){
 			alert("reduce");
 		},
 		'click #add': function(){
 			alert("add");
+		},
+		'click #test1': function () {
+			alert($("#value").val());
+		},
+		'click #test2': function () {
+			var member = Members.findOne(Session.get("selected_member"));
+			Meteor.call(
+				'sendEmail',
+				member.email,
+				'moneyApp@meteor.com',
+				'sent from money contral App',
+				'Hello World!'
+			);
+		},
+		'click #test3': function () {
+			
 		}
 	});
 }
@@ -52,6 +65,16 @@ if (Meteor.isServer) {
 			Members.insert({name:"aaa", balance:0, email:""});
 			Members.insert({name:"bbb", balance:0, email:""});
 			Members.insert({name:"ccc", balance:0, email:""});
+		}
+	});
+	Meteor.methods({
+		sendEmail: function(email){
+			Email.send({
+				to: email,
+				from: 'zhoujun9633@gmail.com',
+				subject: 'Email from money contral App',
+				text: 'Best wishes for you~'
+			});
 		}
 	});
 }
