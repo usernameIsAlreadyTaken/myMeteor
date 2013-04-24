@@ -1,19 +1,27 @@
 <head>
 	<title>Money Contral Website</title>
-	<script type="text/javascript">
-	// JS code
-	$(function(){
-		//alert($(this).width());
-	});
-	</script>
 </head>
 
 <body>
 	<h1 align="center">Money Contral Website</h1>
-	{{> main}}
+	<div id="leftdiv" style="float:left">{{> memberTemplate}}</div>
+	<div id="rightdiv" style="float:right;display:none" align="left">{{> recordTemplate}}</div>
 </body>
 
-<template name="main">
+<template name="memberTemplate">
+	{{#if selected_name}}
+	<div align="center">
+		{{selected_name}} selected &nbsp;&nbsp;&nbsp; 
+		value:<input id="value" size="3" /> &nbsp;&nbsp;&nbsp; 
+		reason:<input id="reason" size="10" /> &nbsp;&nbsp;&nbsp; 
+		<button id="fire"> fire </button>
+		<br/>
+	</div>
+	{{/if}}
+	{{#unless selected_name}}
+	<div align="center">nobody selected</div>
+	{{/unless}}
+	<hr/>
 	<table border="1" align="center">
 		<tr>
 			<th width="160">name</th>
@@ -24,33 +32,16 @@
 			{{> member}}
 		{{/each}}
 		<tr>
-			<td></td>
-			<td align="center"><button> new member </button></td>
+			<td align="center"><button id="newMember"> new member </button></td>
+			<td align="center"><button id="delMember"> del member </button></td>
 			<td align="right">Total: {{total}}</td>
 		</tr>
-		<tr style="display:none">
-			<td>name:<input size="6" /></td>
-			<td>email:<input size="18" /></td>
-			<td><button> Add </button></td>
+		<tr id="addMemberTr" style="display:none">
+			<td>name:<input id="name" size="6" /></td>
+			<td>email:<input id="email" type="email" size="18" /></td>
+			<td align="center"><button id="addMember"> Add </button></td>
 		</tr>
 	</table>
-	<hr/>
-	{{#if selected_name}}
-	<div align="center">
-		{{selected_name}} selected
-		<br/>
-		<button id="reduce"> - money </button> &nbsp;&nbsp;&nbsp; 
-		value:<input id="value" size="10" /> &nbsp;&nbsp;&nbsp; 
-		<button id="add"> + money </button>
-		<br/>
-	</div>
-	<button id="test1">test1</button>
-	<button id="test2">test2</button>
-	<button id="test3">test3</button>
-	{{/if}}
-	{{#unless selected_name}}
-	<div align="center">nobody selected</div>
-	{{/unless}}
 </template>
 
 <template name="member">
@@ -59,4 +50,21 @@
 		<td align="center">{{email}}</td>
 		<td align="right">{{balance}}</td>
 	</tr>
+</template>
+
+<template name="recordTemplate">
+	<table border="1" align="center">
+		<tr>
+			<th align="center" width="100">money</th>
+			<th align="center" width="100">reason</th>
+			<th align="center" width="400">date</th>
+		</tr>
+		{{#each records}}
+		<tr>
+			<td align="center">{{money}}</td>
+			<td align="center">{{reason}}</td>
+			<td align="center">{{date}}</td>
+		</tr>
+		{{/each}}
+	</table>
 </template>

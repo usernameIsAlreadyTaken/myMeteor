@@ -16,16 +16,12 @@ if (Meteor.isServer) {
 		
 	});
 	Meteor.methods({
-		sendEmail: function(to, from, subject, text){
-			// Let other method calls from the same client start running,
-			// without waiting for the email sending to complete.
-			this.unblock();
-
+		sendEmail: function(email){
 			Email.send({
-				to: to,
-				from: from,
-				subject: subject,
-				text: text
+				to: email,
+				from: 'zhoujun9633@gmail.com',
+				subject: 'email from Chris',
+				text: 'Best wishes for you~'
 			});
 		}
 	});
